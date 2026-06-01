@@ -1,16 +1,107 @@
-# React + Vite
+# Customer Support Analytics Dashboard
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+A React-based dashboard application being built as part of my 90-day Frontend Engineering journey.
 
-Currently, two official plugins are available:
+## Objective
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+The goal of this project is to strengthen my frontend engineering skills through hands-on development while preparing for frontend and full-stack interviews.
 
-## React Compiler
+This project focuses on:
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+* JavaScript fundamentals
+* React fundamentals and advanced concepts
+* TypeScript
+* API integration
+* Testing
+* AI-assisted development workflows
+* Frontend system design and architecture
 
-## Expanding the ESLint configuration
+## Tech Stack
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+* React
+* Vite
+* JavaScript
+* Git & GitHub
+
+## Planned Features
+
+### Phase 1
+
+* Dashboard Layout
+* Metrics Cards
+* Ticket Counter
+* Responsive UI
+
+### Phase 2
+
+* Ticket Management
+* Search & Filters
+* Mock API Integration
+
+### Phase 3
+
+* Customer Analytics
+* Satisfaction Metrics
+* Charts & Visualizations
+
+### Phase 4
+
+* Authentication
+* Protected Routes
+
+### Phase 5
+
+* Testing
+* Performance Optimization
+
+### Phase 6
+
+* TypeScript Migration
+
+## Learning Journey
+
+### Day 1
+
+Completed:
+
+* Setup React project using Vite
+* Created project folder structure
+* Learned React application entry point (`main.jsx`)
+* Learned React components
+* Learned `useState`
+* Understood the difference between state variables and local variables
+
+Challenges:
+
+* Could not start JavaScript fundamentals due to office work commitments
+
+Next Steps:
+
+* Learn `let` vs `const`
+* Learn arrays and objects
+* Learn functions and arrow functions
+
+## Getting Started
+
+Clone the repository:
+
+```bash
+git clone https://github.com/Mikita1012/customer-support-analytics-dashboard.git
+```
+
+Install dependencies:
+
+```bash
+npm install
+```
+
+Run locally:
+
+```bash
+npm run dev
+```
+
+## Repository
+
+GitHub:
+https://github.com/Mikita1012/customer-support-analytics-dashboard
