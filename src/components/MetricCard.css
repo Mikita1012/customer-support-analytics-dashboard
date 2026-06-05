@@ -1,0 +1,16 @@
+.metric-card {
+  border: 1px solid #ccc;
+  padding: 16px;
+  border-radius: 8px;
+  width: 200px;
+}
+
+.metric-card h2 {
+  margin: 0;
+  font-size: 18px;
+}
+
+.metric-card p {
+  font-size: 28px;
+  font-weight: bold;
+}
