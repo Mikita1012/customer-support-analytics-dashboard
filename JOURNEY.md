@@ -466,6 +466,93 @@ React Fragments -- <></>
 * Fragments help keep the DOM clean.
 * React applications are built by composing reusable components.
 
+## Day 5 - Reusable Components & Dynamic Rendering
+
+### Learned
+
+#### CSS Flexbox
+
+Learned the purpose of:
+
+```css
+display: flex;
+gap: 20px;
+flex-wrap: wrap;
+```
+
+Key concepts:
+
+* `display: flex` arranges child elements in a row.
+* `gap` adds spacing between elements.
+* `flex-wrap: wrap` moves items to the next row when there is insufficient space.
+
+#### Dynamic Rendering using map()
+
+Created UI dynamically using array data.
+
+Example:
+
+```jsx
+{
+  metrics.map((metric) => (
+    <MetricCard
+      key={metric.title}
+      title={metric.title}
+      value={metric.value}
+    />
+  ));
+}
+```
+
+Benefits:
+
+* UI is generated from data.
+* Adding a new object to the array automatically renders a new card.
+* Reduces repetitive code.
+
+#### React Key Prop
+
+Example:
+
+```jsx
+key={metric.title}
+```
+
+Purpose:
+
+* Helps React identify list items uniquely.
+* Improves rendering performance.
+* Enables efficient updates during re-renders.
+
+### Key Takeaways
+
+* Props make components reusable.
+* Parent components pass data to child components.
+* React Fragments help keep the DOM clean.
+* Flexbox is commonly used for dashboard layouts.
+* `map()` is the standard way to render lists in React.
+* React UIs should be data-driven rather than hardcoded.
+* Keys help React efficiently update lists.
+
+### Dashboard Progress
+
+Completed:
+
+✅ Built reusable `MetricCard` component
+
+✅ Styled Metric Cards
+
+✅ Created dashboard card layout using Flexbox
+
+✅ Rendered cards dynamically using `map()`
+
+✅ Learned React list rendering and key props
+
+### Confidence Reflection
+
+* Understanding of React component architecture is improving.
+* Comfortable with props and component reusability.
+* Need more practice with React terminology and interview-style explanations.
 
 
 **# INTERVIEW LEVEL ANSWERS **-
@@ -518,3 +605,19 @@ Q. What is a React Fragment?
 Q. Why we use <></> instead of div when returning an element in react ?
 - React Fragment acts as a single wrapper element from React's perspective. 
 <></> these are called react fragments , and it does not create an extra DOM element like .div does. The advantages of <></> are that they don't create an extra DOM element on the DOM tree like div does. 
+
+Q. What does flex-wrap: wrap do?
+- It allows flex items to move onto multiple lines when there isn't enough space in the container, improving responsiveness.
+
+Q. Why do we use a key prop in React lists?
+- The key prop helps React uniquely identify elements in a list, allowing it to efficiently update, add, or remove items during re-rendering.
+
+Q. Can we use index as key?
+- Yes, but only when the list is static and items are not reordered, added, or removed. Using a unique identifier is preferred because it helps React correctly track changes in the list.
+
+Q. Is using index as key a good practice?
+- Index can be used for static lists, but for dynamic lists it's recommended to use a stable unique identifier because React relies on keys to track elements efficiently during re-renders.
+
+Q. map iterates over the array and takes this value
+- The UI is generated from data. Since the component is rendered using map(), adding a new object to the array automatically creates a new MetricCard during rendering.
+

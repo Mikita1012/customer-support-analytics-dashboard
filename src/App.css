@@ -183,6 +183,14 @@
   }
 } */
 
+.dashboard {
+  padding: 24px;
+}
+
+.dashboard h1 {
+  margin-bottom: 24px;
+}
+
 .dashboard-cards {
   display: flex;
   gap: 20px;

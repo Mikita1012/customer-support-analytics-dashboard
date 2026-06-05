@@ -4,7 +4,7 @@ import './MetricCard.css'
 function MetricCard({title, value}) {
   return (
     <div className='metric-card'>
-        <h1>{title}</h1>
+        <h2>{title}</h2>
         <p>{value}</p>
     </div>
   )
