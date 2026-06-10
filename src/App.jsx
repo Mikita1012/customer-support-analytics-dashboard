@@ -7,6 +7,7 @@ import MetricCard from "./components/MetricCard";
 
 function App() {
   const [ticketCount, setTicketCount] = useState(25);
+  const[showDashboard, setShowDashboard] = useState(true);
 
   const metrics = [
     {
@@ -24,7 +25,7 @@ function App() {
 
     {
       title: "Pending",
-      value: 10
+      value: 10,
     },
 
     {
@@ -34,6 +35,9 @@ function App() {
   ];
   return (
     <div className="dashboard">
+      <button onClick={() => setShowDashboard(!showDashboard)}>
+        Toggle Dashboard
+      </button>
       <h1>Customer Support Analytics Dashboard</h1>
       {/* <div className='dashboard-cards'>
         <MetricCard
@@ -53,12 +57,18 @@ function App() {
         value={300}
       />
       </div> */}
-
-      <div className="dashboard-cards">
-        {metrics.map((metric, index) => (
-          <MetricCard key={index} title={metric.title} value={metric.value} />   //For every metric inside metrics array create one MetricCard
-        ))}
-      </div>
+      {
+      showDashboard ? (
+        <div className="dashboard-cards">
+          {
+          metrics.map((metric, index) => (
+            <MetricCard key={index} title={metric.title} value={metric.value}  //For every metric inside metrics array create one MetricCard
+          />
+          ))}
+        </div>
+      ) : (
+        <p>Dashboard Hidden</p>
+      )}
     </div>
   );
 }
