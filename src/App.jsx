@@ -6,7 +6,7 @@ import "./App.css";
 import MetricCard from "./components/MetricCard";
 
 function App() {
-  const [ticketCount, setTicketCount] = useState(25);
+  const [ticketCount, setTicketCount] = useState(125);
   const[showDashboard, setShowDashboard] = useState(true);
 
   const metrics = [
@@ -62,8 +62,13 @@ function App() {
         <div className="dashboard-cards">
           {
           metrics.map((metric, index) => (
-            <MetricCard key={index} title={metric.title} value={metric.value}  //For every metric inside metrics array create one MetricCard
-          />
+            <>
+            <MetricCard key={index} title={metric.title} value={ticketCount}  //For every metric inside metrics array create one MetricCard
+          /> 
+          <button onClick={() => setTicketCount(ticketCount+1)}>
+            Add Ticket
+          </button>
+          </>
           ))}
         </div>
       ) : (

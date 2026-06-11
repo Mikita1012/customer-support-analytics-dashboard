@@ -753,6 +753,186 @@ Completed:
 * Better understanding of JavaScript truthy and falsy values.
 * Starting to predict UI behavior before running the code.
 
+## Day 7 - Event Handling & State Updates
+
+### Learned
+
+#### Event Handling in React
+
+React handles user interactions through events.
+
+Example:
+
+```jsx
+<button onClick={handleAddTicket}>
+  Add Ticket
+</button>
+```
+
+Common React Events:
+
+```jsx
+onClick
+onChange
+onSubmit
+```
+
+#### Event Handler Functions
+
+Created functions that execute in response to user actions.
+
+Example:
+
+```jsx
+const handleAddTicket = () => {
+  console.log("Ticket Added");
+};
+```
+
+Attached to UI elements:
+
+```jsx
+<button onClick={handleAddTicket}>
+  Add Ticket
+</button>
+```
+
+#### Function Reference vs Function Invocation
+
+Correct:
+
+```jsx
+<button onClick={handleAddTicket}>
+```
+
+Reason:
+
+* Passes a function reference.
+* Function executes when the button is clicked.
+
+Incorrect:
+
+```jsx
+<button onClick={handleAddTicket()}>
+```
+
+Reason:
+
+* Function executes immediately during component rendering.
+* React receives the return value instead of the function.
+
+#### State Updates from User Actions
+
+Used an event handler to update state.
+
+Example:
+
+```jsx
+const [ticketCount, setTicketCount] = useState(125);
+
+const handleAddTicket = () => {
+  setTicketCount(ticketCount + 1);
+};
+```
+
+Result:
+
+* Clicking the button updates state.
+* React re-renders the component.
+* UI displays the updated value.
+
+#### React Re-render Cycle
+
+Learned the flow:
+
+```text
+User Click
+    ↓
+Event Handler Executes
+    ↓
+State Update
+    ↓
+React Detects State Change
+    ↓
+Component Re-renders
+    ↓
+UI Updates
+```
+
+#### Local Variables vs State Variables
+
+Local Variable:
+
+```jsx
+let count = 0;
+```
+
+State Variable:
+
+```jsx
+const [count, setCount] = useState(0);
+```
+
+Key Difference:
+
+* React does not track local variables.
+* Updating local variables does not trigger re-renders.
+* Updating state variables triggers re-renders.
+
+Example:
+
+```jsx
+let count = 0;
+
+const handleClick = () => {
+  count++;
+};
+```
+
+Result:
+
+* Console value changes.
+* UI does not update.
+
+#### Why React Uses State
+
+State allows React to:
+
+* Track changes.
+* Re-render components.
+* Keep UI synchronized with data.
+
+### Key Takeaways
+
+* React responds to user actions using events.
+* Event handlers are functions executed in response to events.
+* Pass function references to event handlers.
+* Avoid invoking functions directly inside event props.
+* State updates trigger React re-renders.
+* Local variables do not trigger UI updates.
+* React UI is driven by state changes.
+
+### Dashboard Progress
+
+Completed:
+
+✅ Added interactive button handling
+
+✅ Updated ticket count using state
+
+✅ Observed React re-render behavior
+
+✅ Understood function references vs function calls
+
+✅ Reinforced state vs local variable concepts
+
+### Confidence Reflection
+
+* Better understanding of how React handles user interactions.
+* Comfortable predicting UI behavior after state updates.
+* Beginning to understand React's rendering lifecycle.
+* Able to reason about React code before running it.
+
 
 
 **# INTERVIEW LEVEL ANSWERS **-
@@ -830,3 +1010,14 @@ Q. Why is this dangerous?
   }
 - Because empty arrays are truthy in JavaScript. The condition will pass even when the array contains no data. It's safer to check metrics.length > 0 when we want to verify that data exists.  
 
+Q. Why doesn't this update the UI?
+   ```javascript
+    let count = 0;
+
+    const handleClick = () => {
+      count++;
+    };
+   ```
+
+- Because count is a local variable. React does not track local variables. Updating it does not trigger a re-render. To update the UI, the value should be stored in state using useState. 
+React does not track changes to local variables. Updating a local variable does not trigger a re-render. Only state updates using useState notify React that the component should re-render.
