@@ -933,6 +933,213 @@ Completed:
 * Beginning to understand React's rendering lifecycle.
 * Able to reason about React code before running it.
 
+## Day 8 - Forms, Input Handling & Dynamic Ticket Management
+
+### Learned
+
+#### Input Handling in React
+
+Created an input field and connected it to React state.
+
+Example:
+
+```jsx
+const [ticketTitle, setTicketTitle] = useState("");
+```
+
+```jsx
+<input
+  type="text"
+  value={ticketTitle}
+  onChange={(event) =>
+    setTicketTitle(event.target.value)
+  }
+/>
+```
+
+#### onChange Event
+
+Learned that `onChange` fires whenever the value of an input field changes.
+
+Examples:
+
+```text
+M
+Mi
+Mik
+Miki
+Mikita
+```
+
+Each change triggers the `onChange` event.
+
+#### event.target.value
+
+Learned how to capture user input.
+
+Example:
+
+```jsx
+event.target.value
+```
+
+Contains the current value entered by the user.
+
+Example:
+
+```text
+User types:
+Login Issue
+
+event.target.value:
+"Login Issue"
+```
+
+#### Controlled Components
+
+Learned that React can control form inputs through state.
+
+Example:
+
+```jsx
+<input
+  value={ticketTitle}
+  onChange={(event) =>
+    setTicketTitle(event.target.value)
+  }
+/>
+```
+
+Key Insight:
+
+* React state becomes the source of truth.
+* UI always reflects the current state.
+
+#### Managing Form State
+
+Stored user input using `useState`.
+
+Example:
+
+```jsx
+const [ticketTitle, setTicketTitle] = useState("");
+```
+
+Benefits:
+
+* Easy to access user-entered values.
+* Easy to validate input.
+* Easy to submit form data.
+
+#### Adding Items to an Array in State
+
+Learned how to update arrays using the spread operator.
+
+Example:
+
+```jsx
+setTickets([
+  ...tickets,
+  ticketTitle
+]);
+```
+
+Key Insight:
+
+* Create a new array.
+* Copy existing tickets.
+* Add the new ticket at the end.
+
+#### Dynamic Rendering using map()
+
+Rendered ticket data dynamically.
+
+Example:
+
+```jsx
+{
+  tickets.map((ticket, index) => (
+    <li key={index}>{ticket}</li>
+  ))
+}
+```
+
+Key Insight:
+
+* React creates UI based on data.
+* UI automatically updates when state changes.
+
+#### Input Validation
+
+Prevented empty tickets from being added.
+
+Example:
+
+```jsx
+if (ticketTitle.trim() === "") {
+  return;
+}
+```
+
+Purpose:
+
+* Avoid empty entries.
+* Improve user experience.
+
+#### Clearing Input After Submission
+
+Learned how to reset form fields.
+
+Example:
+
+```jsx
+setTicketTitle("");
+```
+
+Result:
+
+* Ticket added successfully.
+* Input field becomes empty.
+* Ready for next entry.
+
+### Key Takeaways
+
+* Forms are controlled through React state.
+* `onChange` captures user input.
+* `event.target.value` contains the current input value.
+* Controlled components keep UI synchronized with state.
+* Arrays in state should be updated immutably using the spread operator.
+* `map()` is commonly used to render lists dynamically.
+* Form validation improves application reliability.
+* React re-renders automatically after state updates.
+
+### Dashboard Progress
+
+Completed:
+
+✅ Added Create Ticket input field
+
+✅ Captured user input using state
+
+✅ Added ticket titles to an array
+
+✅ Rendered tickets dynamically using map()
+
+✅ Implemented input validation
+
+✅ Cleared input field after successful submission
+
+✅ Connected Forms + State + Dynamic Rendering
+
+### Confidence Reflection
+
+* Comfortable with handling form inputs in React.
+* Able to predict state changes before running code.
+* Better understanding of controlled components.
+* Beginning to build real application features instead of isolated examples.
+* More confident debugging React rendering issues.
+
+
 
 
 **# INTERVIEW LEVEL ANSWERS **-
@@ -1021,3 +1228,12 @@ Q. Why doesn't this update the UI?
 
 - Because count is a local variable. React does not track local variables. Updating it does not trigger a re-render. To update the UI, the value should be stored in state using useState. 
 React does not track changes to local variables. Updating a local variable does not trigger a re-render. Only state updates using useState notify React that the component should re-render.
+
+Q. What do you think onChange does?
+- onChange is an event that fires whenever the value of an input field changes.
+
+Q. What is a Controlled Component ?
+- A controlled component is a form element whose value is controlled by React state. The component updates state using events such as onChange, and React uses that state to determine the displayed value.
+
+Q. Why can button access ticketTitle ?
+- Because ticketTitle is a state variable defined inside the App component. Both the input and button are rendered within the same component and therefore have access to the same state.
