@@ -4,12 +4,29 @@ import viteLogo from "./assets/vite.svg";
 import heroImg from "./assets/hero.png";
 import "./App.css";
 import MetricCard from "./components/MetricCard";
+import { useEffect } from "react";
 
 function App() {
   const [ticketCount, setTicketCount] = useState(125);
   const [showDashboard, setShowDashboard] = useState(true);
   const [ticketTitle, setTicketTitle] = useState("");
   const [tickets, setTickets] = useState([]);
+
+  useEffect(() => {
+    console.log(`Ticket Count Updated ${ticketCount}`);
+  }, [ticketCount]);
+
+  useEffect(() => {
+    console.log("Runs every render");
+  });
+
+  useEffect(() => {
+    console.log("Runs once");
+  }, []);
+
+  useEffect(() => {
+    console.log("Ticket Count Changed");
+  }, [ticketCount])
 
   const metrics = [
     {
@@ -85,15 +102,15 @@ function App() {
                   metric.title === "Total Tickets" ? ticketCount : metric.value
                 } //For every metric inside metrics array create one MetricCard
               />
-              <button onClick={() => setTicketCount((prev) => prev + 1)}>
-                Add Ticket
-              </button>
             </>
           ))}
         </div>
       ) : (
         <p>Dashboard Hidden</p>
       )}
+      <button onClick={() => setTicketCount((prev) => prev + 1)}>
+        Add Ticket
+      </button>
     </div>
   );
 }

@@ -1139,6 +1139,231 @@ Completed:
 * Beginning to build real application features instead of isolated examples.
 * More confident debugging React rendering issues.
 
+## Day 9 - useEffect & Dependency Arrays
+
+### Learned
+
+#### What is useEffect?
+
+`useEffect` is a React Hook used to perform side effects after a component renders.
+
+Examples of side effects:
+
+* API Calls
+* Timers
+* Local Storage Operations
+* Analytics Tracking
+* Event Listeners
+
+Example:
+
+```jsx
+useEffect(() => {
+  console.log("Component Mounted");
+}, []);
+```
+
+#### Why useEffect Exists
+
+React components should focus on:
+
+```text
+State + Props
+      ↓
+Render UI
+```
+
+Operations that interact with the outside world should be handled using `useEffect`.
+
+#### Render vs Effect
+
+Learned the execution order:
+
+```text
+Component Render
+      ↓
+UI Appears
+      ↓
+useEffect Runs
+```
+
+Example:
+
+```jsx
+console.log("Render");
+
+useEffect(() => {
+  console.log("Effect");
+}, []);
+```
+
+Output:
+
+```text
+Render
+Effect
+```
+
+#### useEffect with No Dependency Array
+
+Example:
+
+```jsx
+useEffect(() => {
+  console.log("Runs Every Render");
+});
+```
+
+Behavior:
+
+* Runs after every render.
+* Runs whenever any state update causes a re-render.
+
+#### useEffect with Empty Dependency Array
+
+Example:
+
+```jsx
+useEffect(() => {
+  console.log("Runs Once");
+}, []);
+```
+
+Behavior:
+
+* Runs only once after the initial render.
+* Commonly used for initial API calls.
+
+#### useEffect with Single Dependency
+
+Example:
+
+```jsx
+useEffect(() => {
+  console.log("Ticket Count Changed");
+}, [ticketCount]);
+```
+
+Behavior:
+
+* Runs on initial render.
+* Runs whenever `ticketCount` changes.
+
+#### Dependency Tracking
+
+React checks the dependency array after each render.
+
+Example:
+
+```jsx
+useEffect(() => {
+  console.log("Count Effect");
+}, [count]);
+```
+
+React internally checks:
+
+```text
+Did count change?
+
+YES → Run Effect
+NO  → Skip Effect
+```
+
+#### Multiple Dependencies
+
+Example:
+
+```jsx
+useEffect(() => {
+  console.log("Effect Running");
+}, [ticketCount, ticketTitle]);
+```
+
+Behavior:
+
+* Runs on initial render.
+* Runs when `ticketCount` changes.
+* Runs when `ticketTitle` changes.
+* Does not run for unrelated state changes.
+
+#### Dependency Arrays Control Effect Execution
+
+Examples:
+
+```jsx
+useEffect(() => {}, []);
+```
+
+Runs:
+
+```text
+Initial Render Only
+```
+
+---
+
+```jsx
+useEffect(() => {}, [count]);
+```
+
+Runs:
+
+```text
+Initial Render
++
+Whenever count changes
+```
+
+---
+
+```jsx
+useEffect(() => {});
+```
+
+Runs:
+
+```text
+After Every Render
+```
+
+### Key Takeaways
+
+* `useEffect` runs after rendering.
+* Dependency arrays control when effects execute.
+* Empty dependency array (`[]`) means run once.
+* No dependency array means run after every render.
+* React only tracks values listed in the dependency array.
+* State changes alone do not trigger an effect unless the changed state is part of the dependency array.
+* Effects are commonly used for API calls and side effects.
+
+### Dashboard Progress
+
+Completed:
+
+✅ Added first `useEffect`
+
+✅ Observed render vs effect execution order
+
+✅ Learned dependency arrays
+
+✅ Tested single dependency tracking
+
+✅ Tested multiple dependency tracking
+
+✅ Connected `ticketCount` changes with `useEffect`
+
+✅ Understood when effects run and when they do not
+
+### Confidence Reflection
+
+* Comfortable explaining why `useEffect` exists.
+* Understand the difference between rendering and side effects.
+* Can predict when an effect will run based on its dependency array.
+* More confident answering React interview questions related to `useEffect`.
+* Ready to learn API calls using `useEffect`.
+
+
 
 
 
@@ -1237,3 +1462,32 @@ Q. What is a Controlled Component ?
 
 Q. Why can button access ticketTitle ?
 - Because ticketTitle is a state variable defined inside the App component. Both the input and button are rendered within the same component and therefore have access to the same state.
+
+Q What is [] in useEffect ?
+- An empty dependency array tells React to run the effect only once after the initial render.
+
+Q. What if we have a value in dependcy array ?
+- The dependency array tells React when to run the effect. If any value inside the dependency array changes between renders, React executes the effect again.
+
+Q. When does useEffect run ?
+- useEffect runs after React renders the component. React first updates the UI and then executes the effect.
+
+Q.  const [count, setCount] = useState(0);
+const [name, setName] = useState("Mikita");
+  useEffect(() => {
+    console.log("Count Effect");
+  }, [count]);
+
+User changes - Mikita to John, will useEffect run on this change ?
+
+- The effect does not run because React only tracks values listed in the dependency array. Since name is not a dependency, changing it does not trigger the effect.
+
+What if  count = 0 ---> 1 ??
+Will useEffect run ?
+The effect runs because count is included in the dependency array. When React detects that count changed between renders, it executes the effect again.
+
+Q. What's wrong with this?
+useEffect(() => {
+  fetchTickets();
+});
+- Since there is no dependency array, the effect runs after every render. If the API call updates state, it can cause another render, which triggers the e
