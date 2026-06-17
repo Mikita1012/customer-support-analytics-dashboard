@@ -1363,6 +1363,288 @@ Completed:
 * More confident answering React interview questions related to `useEffect`.
 * Ready to learn API calls using `useEffect`.
 
+## Day 11 - React Router Fundamentals
+
+### Learned
+
+#### Why React Router Exists
+
+React applications often contain multiple pages such as:
+
+* Dashboard
+* Tickets
+* Customers
+* Settings
+
+Instead of placing everything on a single page, React Router allows navigation between different pages using URLs.
+
+Example:
+
+```text
+/dashboard
+/tickets
+/customers
+/settings
+```
+
+#### Routes and URLs
+
+A route maps a URL path to a React component.
+
+Example:
+
+```jsx
+<Route
+  path="/tickets"
+  element={<Tickets />}
+/>
+```
+
+When the URL is:
+
+```text
+/tickets
+```
+
+React Router renders:
+
+```jsx
+<Tickets />
+```
+
+#### BrowserRouter
+
+Learned that `BrowserRouter` provides routing functionality to the entire React application.
+
+Example:
+
+```jsx
+<BrowserRouter>
+  <App />
+</BrowserRouter>
+```
+
+Responsibilities:
+
+* Reads the browser URL
+* Tracks URL changes
+* Enables navigation
+* Allows Route matching
+
+#### Routes and Route Components
+
+Learned how React Router determines which component should be displayed based on the current URL.
+
+Example:
+
+```jsx
+<Routes>
+  <Route
+    path="/"
+    element={<Dashboard />}
+  />
+
+  <Route
+    path="/tickets"
+    element={<Tickets />}
+  />
+</Routes>
+```
+
+#### Creating Separate Pages
+
+Created page components:
+
+```text
+Dashboard.jsx
+Tickets.jsx
+Customers.jsx
+Settings.jsx
+```
+
+Each page represents a separate screen in the application.
+
+#### Navigation Using Link
+
+Learned how to navigate between pages without refreshing the browser.
+
+Example:
+
+```jsx
+<Link to="/tickets">
+  Tickets
+</Link>
+```
+
+Benefits:
+
+* Updates the URL
+* Renders the correct component
+* Does not refresh the page
+
+#### Link vs Anchor Tag
+
+React Router:
+
+```jsx
+<Link to="/tickets">
+  Tickets
+</Link>
+```
+
+Behavior:
+
+```text
+URL Changes
+↓
+Component Updates
+↓
+No Page Refresh
+```
+
+Traditional HTML:
+
+```html
+<a href="/tickets">
+  Tickets
+</a>
+```
+
+Behavior:
+
+```text
+URL Changes
+↓
+Full Page Refresh
+```
+
+#### Browser History Integration
+
+Learned that React Router works with browser history.
+
+Example:
+
+```text
+/dashboard
+↓
+/tickets
+```
+
+Pressing Back:
+
+```text
+/tickets
+↓
+/dashboard
+```
+
+The appropriate component is rendered automatically.
+
+#### URL-Driven Rendering
+
+React Router is driven by the current URL.
+
+Example:
+
+```text
+http://localhost:5173/tickets
+```
+
+React Router checks the URL and renders:
+
+```jsx
+<Tickets />
+```
+
+even if the user directly enters the URL in the browser.
+
+#### Layouts and Outlet
+
+Learned why navigation bars usually remain visible across pages.
+
+Example:
+
+```jsx
+<Navbar />
+<Outlet />
+```
+
+Navbar:
+
+```text
+Always Visible
+```
+
+Outlet:
+
+```text
+Displays the component matching the current route
+```
+
+Examples:
+
+```text
+/dashboard
+```
+
+Outlet renders:
+
+```jsx
+<Dashboard />
+```
+
+---
+
+```text
+/customers
+```
+
+Outlet renders:
+
+```jsx
+<Customers />
+```
+
+### Key Takeaways
+
+* React Router enables multi-page React applications.
+* URLs determine which component gets rendered.
+* BrowserRouter provides routing functionality.
+* Link enables navigation without page refresh.
+* Route maps URLs to components.
+* Browser history works automatically with React Router.
+* Layouts allow shared UI elements such as Navbar and Sidebar.
+* Outlet acts as a placeholder for route content.
+
+### Dashboard Progress
+
+Completed:
+
+✅ Installed React Router
+
+✅ Understood BrowserRouter
+
+✅ Learned Routes and Route
+
+✅ Created separate page components
+
+✅ Learned Link navigation
+
+✅ Understood URL-based rendering
+
+✅ Learned browser history integration
+
+✅ Learned Layout and Outlet concepts
+
+### Confidence Reflection
+
+* Comfortable explaining what React Router does.
+* Understand how URLs map to React components.
+* Can explain the difference between Link and anchor tags.
+* Understand navigation without page refresh.
+* Ready to build a multi-page dashboard application.
+
+
 
 
 
@@ -1491,3 +1773,22 @@ useEffect(() => {
   fetchTickets();
 });
 - Since there is no dependency array, the effect runs after every render. If the API call updates state, it can cause another render, which triggers the e
+
+Q What is an API ?
+- APIs act as a bridge between the frontend and the database. The frontend sends requests to the API, and the API retrieves data from the database and returns it in a format that the frontend can understand, usually JSON.
+
+
+Q. Why do we wrap App inside BrowserRouter?
+- BrowserRouter provides routing functionality to the entire React application. It monitors the browser URL and allows Route and Routes components to determine which page should be rendered.
+
+Q What is Link in React Router ?
+- Link is provided by React Router. It allows navigation between routes without causing a full page refresh, helping maintain the Single Page Application experience.
+
+Q. WHy not use <a> ?
+- React reloads the entire page unlike Link
+
+Q. What happens when a user clicks a React Router Link?
+- React Router updates the URL, matches the route against the configured Route components, renders the corresponding component, and updates the UI without performing a full page refresh.
+
+
+
