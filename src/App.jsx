@@ -10,6 +10,8 @@ import Tickets from "./pages/Tickets";
 import Customers from "./pages/Customers";
 import Settings from "./pages/Settings";
 import Dashboard from "./pages/Dashboard";
+import UserContext from "./context/UserContext";
+import Navbar from "./components/Navbar";
 
 function App() {
   const [ticketCount, setTicketCount] = useState(125);
@@ -20,6 +22,10 @@ function App() {
   const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState(null);
 
+  const user = {
+    name: "Mikita", 
+    role: "Admin"
+  }
   useEffect(() => {
     console.log(`Ticket Count Updated ${ticketCount}`);
   }, [ticketCount]);
@@ -61,7 +67,7 @@ function App() {
       }
     };
     fetchUsers();
-  });
+  }, []);
 
   const metrics = [
     {
@@ -151,20 +157,21 @@ function App() {
           users.map((user) => <li key={user.id}>{user.name}</li>)
         )}
       </ul> */}
-
+      <UserContext.Provider value={user}>
       <nav>
         <Link to="/">Dashboard</Link> {" | "}
         <Link to="/tickets">Tickets</Link> {" | "}
         <Link to="/customers">Customers</Link> {" | "}
         <Link to="/settings">Settings</Link> {" | "}
       </nav>
-
+      <Navbar />
       <Routes>
         <Route path="/" element={<Dashboard />} />
         <Route path="/tickets" element={<Tickets />} />
         <Route path="/customers" element={<Customers />} />
         <Route path="/settings" element={<Settings />} />
       </Routes>
+      </UserContext.Provider>
     </>
   );
 }

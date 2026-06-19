@@ -1644,6 +1644,150 @@ Completed:
 * Understand navigation without page refresh.
 * Ready to build a multi-page dashboard application.
 
+# Day 12, 13 - Context API
+
+## Topic Covered
+
+Context API
+
+---
+
+## What I Learned
+
+### Props Drilling
+
+Learned that props drilling occurs when data must be passed through multiple intermediate components that do not actually use the data.
+
+Example:
+
+App → Dashboard → Layout → Navbar
+
+Even though only Navbar needs the data, every component in between must pass it forward.
+
+---
+
+### Context API
+
+Learned that Context API helps solve the props drilling problem by allowing components to access shared data directly.
+
+Context acts like a shared data container that can be accessed by multiple components.
+
+---
+
+### createContext()
+
+Used createContext() to create a new Context object.
+
+Example:
+
+const UserContext = createContext();
+
+This creates a Context that can store and share data across components.
+
+---
+
+### Provider
+
+Learned that Provider is responsible for making data available to child components.
+
+Example:
+
+<UserContext.Provider value={user}>
+...
+</UserContext.Provider>
+
+The value prop contains the data that will be shared.
+
+---
+
+### useContext()
+
+Learned that useContext() is used to read data from a Context.
+
+Example:
+
+const user = useContext(UserContext);
+
+This allows components to directly access shared data without receiving props.
+
+---
+
+### State vs Context
+
+Important understanding:
+
+* useState stores data.
+* Context distributes data.
+
+Context does not replace state.
+
+State owns data while Context shares data.
+
+---
+
+## What I Built
+
+Created a UserContext file.
+
+Created a user object:
+
+{
+name: "Mikita",
+role: "Admin"
+}
+
+Created a Navbar component.
+
+Used useContext() inside Navbar to access user information from Context.
+
+Displayed:
+
+* Welcome Mikita
+* Role: Admin
+
+---
+
+## Challenges Faced
+
+Initially forgot to pass the value prop to the Provider.
+
+Example:
+
+<UserContext.Provider>
+
+This caused useContext() to return undefined.
+
+Learned that the Provider must receive data through the value prop.
+
+Example:
+
+<UserContext.Provider value={user}>
+
+---
+
+## Questions & Answers
+
+
+
+---
+
+## Key Takeaway
+
+Before Context API:
+
+App → Dashboard → Layout → Navbar
+
+After Context API:
+
+Navbar ← Context
+
+Dashboard ← Context
+
+Settings ← Context
+
+Components can directly access shared data without prop drilling.
+
+
 
 
 
@@ -1789,6 +1933,37 @@ Q. WHy not use <a> ?
 
 Q. What happens when a user clicks a React Router Link?
 - React Router updates the URL, matches the route against the configured Route components, renders the corresponding component, and updates the UI without performing a full page refresh.
+
+Q. What problem does Context API solve?
+- Context API solves props drilling by allowing components to access shared data directly without passing props through multiple intermediate components.
+
+Q. What is Props Drilling?
+- Props drilling is the process of passing data through several components that do not need the data themselves, only to deliver it to a deeper child component.
+
+Q. What are the three main parts of Context API?
+- * createContext()
+  * Provider
+  * useContext()
+
+
+Q. What is the difference between useState and Context API?
+- useState stores and updates data. Context API shares data across multiple components.
+
+Q. What happens when useContext is used without a Provider?
+- React returns the Context's default value. If no default value was supplied to createContext(), the result is undefined.
+
+Q. Which is responsible for making data available ?
+- Provider - is what shares data with all components inside it 
+State - owns data 
+Context - shares data
+
+Q. Q. Does Context store data permanently?
+- No. It stores data in React memory while the application is running. Refreshing the page resets it unless persisted elsewhere.
+
+Q. Is Context API a replacement for all state management?
+- No.
+It is useful for shared application state, but large applications may use solutions like Redux, Zustand, or other state management libraries.
+
 
 
 
