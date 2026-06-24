@@ -1788,6 +1788,267 @@ Settings ← Context
 Components can directly access shared data without prop drilling.
 
 
+# Day 14 - Custom Hooks
+
+## Learned
+
+### Why Custom Hooks Exist
+
+As React applications grow, multiple components may require the same logic.
+
+Example:
+
+```text
+Dashboard
+↓
+Fetch Users
+
+Customers
+↓
+Fetch Users
+
+Settings
+↓
+Fetch Users
+```
+
+Without Custom Hooks, the same logic must be written repeatedly in multiple components.
+
+Custom Hooks allow reusable logic to be written once and reused anywhere.
+
+Benefits:
+
+* Reduces code duplication
+* Improves readability
+* Improves maintainability
+* Keeps components focused on UI
+
+### What is a Custom Hook?
+
+A Custom Hook is a JavaScript function that starts with the word:
+
+```text
+use
+```
+
+Example:
+
+```jsx
+function useUsers() {
+  ...
+}
+```
+
+Custom Hooks allow developers to extract reusable logic from components.
+
+#### Custom Hooks Share Logic, Not State
+
+One of the most important concepts learned today.
+
+Example:
+
+```jsx
+const users1 = useUsers();
+const users2 = useUsers();
+```
+
+Behavior:
+
+```text
+Same Logic
+↓
+Separate State
+```
+
+Learned:
+
+* Custom Hooks share logic
+* Custom Hooks do not share state
+* Every hook invocation creates its own state
+
+#### Extracting Logic From Components
+
+Before:
+
+```jsx
+useState(...)
+useEffect(...)
+fetch(...)
+loading
+error
+```
+
+All logic existed directly inside App.jsx.
+
+After:
+
+```jsx
+const {
+  users,
+  isLoading,
+  error
+} = useUsers();
+```
+
+Behavior:
+
+```text
+Component
+↓
+Calls Hook
+↓
+Receives Data
+```
+
+This keeps components clean and easier to understand.
+
+#### Returning Values From Custom Hooks
+
+Learned that a Custom Hook should return whatever data or functions a component needs.
+
+Example:
+
+```text
+useUsers()
+↓
+users
+isLoading
+error
+```
+
+The component can then consume these values without needing to know how the data was fetched.
+
+#### Separation of Concerns
+
+Learned the importance of separating UI from business logic.
+
+```text
+Component
+↓
+Handles UI
+```
+
+```text
+Custom Hook
+↓
+Handles Logic
+```
+
+This makes React applications easier to scale and maintain.
+
+#### Building useUsers()
+
+Created:
+
+```text
+src/hooks/useUsers.js
+```
+
+Moved user-fetching logic from App.jsx into a reusable hook.
+
+Managed:
+
+```jsx
+const [users, setUsers] = useState([]);
+const [isLoading, setIsLoading] = useState(true);
+const [error, setError] = useState(null);
+```
+
+Fetched data from:
+
+```text
+https://jsonplaceholder.typicode.com/users
+```
+
+Returned:
+
+```jsx
+{
+  users,
+  isLoading,
+  error
+}
+```
+
+Consumed inside App.jsx:
+
+```jsx
+const {
+  users,
+  isLoading,
+  error
+} = useUsers();
+```
+
+#### Hook Responsibility
+
+Initially moved unrelated state into the hook:
+
+```text
+ticketCount
+ticketTitle
+tickets
+showDashboard
+```
+
+Learned that a hook should have a single responsibility.
+
+Since the hook is:
+
+```jsx
+useUsers()
+```
+
+it should only manage:
+
+```text
+users
+isLoading
+error
+```
+
+### Key Takeaways
+
+* Custom Hooks are reusable JavaScript functions.
+* Custom Hooks must start with the word "use".
+* Custom Hooks help remove duplicate logic.
+* Components should focus on UI.
+* Custom Hooks should focus on logic.
+* Custom Hooks share logic, not state.
+* Each hook invocation gets its own state.
+* Custom Hooks should return whatever the component needs.
+* Hooks should follow a single responsibility principle.
+
+### Dashboard Progress
+
+Completed:
+
+✅ Learned Custom Hooks
+
+✅ Created first custom hook (useUsers)
+
+✅ Extracted API fetching logic from App.jsx
+
+✅ Moved loading and error handling into custom hook
+
+✅ Learned how hooks return data
+
+✅ Consumed hook data inside App.jsx
+
+✅ Understood hook responsibility
+
+✅ Understood logic vs state sharing
+
+### Confidence Reflection
+
+* Comfortable explaining what a Custom Hook is.
+* Understand why Custom Hooks exist.
+* Can explain the difference between sharing logic and sharing state.
+* Understand how to return data from a Custom Hook.
+* Can create a basic Custom Hook using useState and useEffect.
+* Beginning to think about separating UI from business logic.
+* Ready to learn more advanced state management using useReducer.
+
 
 
 
@@ -1963,6 +2224,50 @@ Q. Q. Does Context store data permanently?
 Q. Is Context API a replacement for all state management?
 - No.
 It is useful for shared application state, but large applications may use solutions like Redux, Zustand, or other state management libraries.
+
+Q. What is a Custom Hook?
+- A Custom Hook is a JavaScript function that starts with "use" and allows reusable stateful logic to be shared between components.
+
+Q. Does a Custom Hook share state between components?
+- ❌ No
+This is a trick question.
+Example:
+const users1 = useUsers();
+const users2 = useUsers();
+Each call gets its own state.
+Custom Hooks share logic.
+Not state.
+
+
+Q. Why must Custom Hooks start with "use"?
+- React uses the naming convention to identify Hooks and enforce Hook rules.
+
+Q. Can a Custom Hook use other Hooks?
+- ✅ Yes, Very common.
+
+Example:
+useState()
+useEffect()
+useContext()
+inside a Custom Hook.
+
+Q.  What problem do Custom Hooks solve?
+- Custom Hooks help reuse stateful logic across multiple components, reducing code duplication and improving maintainability.
+
+Notice the difference:
+
+Code Duplication
+        +
+Reusable Logic
+        +
+Maintainability
+
+
+Q. Explain Your useUsers Hook
+- The useUsers() hook is responsible for fetching users from an API. It manages three pieces of state: users, loading, and error. When the component mounts, the hook makes an API request using useEffect. If the request succeeds, users are stored in state. If it fails, an error message is stored. The hook then returns users, loading, and error so that any component can use the data without needing to implement the API logic itself.
+
+
+
 
 
 

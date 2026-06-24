@@ -12,20 +12,23 @@ import Settings from "./pages/Settings";
 import Dashboard from "./pages/Dashboard";
 import UserContext from "./context/UserContext";
 import Navbar from "./components/Navbar";
+import useUsers from "./hooks/useUsers";
 
 function App() {
+
+  const {users, isLoading, error} = useUsers();
+
   const [ticketCount, setTicketCount] = useState(125);
   const [showDashboard, setShowDashboard] = useState(true);
   const [ticketTitle, setTicketTitle] = useState("");
   const [tickets, setTickets] = useState([]);
-  const [users, setUsers] = useState([]);
-  const [isLoading, setIsLoading] = useState(true);
-  const [error, setError] = useState(null);
 
   const user = {
     name: "Mikita", 
     role: "Admin"
   }
+
+
   useEffect(() => {
     console.log(`Ticket Count Updated ${ticketCount}`);
   }, [ticketCount]);
@@ -52,22 +55,22 @@ function App() {
   // }, []);
 
   // using ASYNC - AWAIT with ERROR HANDLING
-  useEffect(() => {
-    const fetchUsers = async () => {
-      try {
-        const response = await fetch(
-          "https://jsonplaceholder.typicode.com/users",
-        );
-        const data = await response.json();
-        setUsers(data);
-      } catch (error) {
-        setError("Not able to fetch data");
-      } finally {
-        setIsLoading(false);
-      }
-    };
-    fetchUsers();
-  }, []);
+  // useEffect(() => {
+  //   const fetchUsers = async () => {
+  //     try {
+  //       const response = await fetch(
+  //         "https://jsonplaceholder.typicode.com/users",
+  //       );
+  //       const data = await response.json();
+  //       setUsers(data);
+  //     } catch (error) {
+  //       setError("Not able to fetch data");
+  //     } finally {
+  //       setIsLoading(false);
+  //     }
+  //   };
+  //   fetchUsers();
+  // }, []);
 
   const metrics = [
     {
@@ -103,6 +106,11 @@ function App() {
     setTicketTitle("");
     setTicketCount((prev) => prev + 1);
   };
+
+  console.log(users);
+  console.log(error);
+  console.log(isLoading);
+  
   return (
     <>
       {/* <div className="dashboard">
